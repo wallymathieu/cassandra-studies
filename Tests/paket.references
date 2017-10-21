@@ -1,0 +1,7 @@
+Microsoft.NET.Test.Sdk
+xunit
+xunit.runner.visualstudio
+FSharp.Data
+FSharp.Core
+FSharp.Compiler.Service
+FSharp.Compiler.Tools
