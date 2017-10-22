@@ -111,6 +111,3 @@ type CassandraRepository(session:ISession)=
                 | Order o -> mapper.Insert o
                 | Product p -> mapper.Insert p
 
-    interface IDisposable with
-        member this.Dispose()=session.Dispose()
-
