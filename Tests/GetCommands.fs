@@ -1,10 +1,10 @@
 ﻿namespace Tests
 open System
 open System.IO
-open FSharp.Data
+//open FSharp.Data
 open SomeBasicCassandraApp
 
-type TestData = XmlProvider<"./TestData.xml", Global=false>
+//type TestData = XmlProvider<"./TestData.xml", Global=false>
 
 module GetCommands=
   type WithSeqenceNumber={SequenceNumber:int64; Command:Command}
@@ -18,7 +18,7 @@ module GetCommands=
         !sequence
     let wrap c : WithSeqenceNumber=
         { SequenceNumber=sequence_next(); Command= c}
-
+(*
     let toAddCustomer (o : TestData.Customer)=
         wrap(AddCustomerCommand(id=o.Id,version=o.Version,firstName=o.Firstname,lastName=o.Lastname))
 
@@ -30,13 +30,15 @@ module GetCommands=
 
     let toOrderProduct(o : TestData.OrderProduct)=
         wrap(AddProductToOrder(productId=o.Product, orderId=o.Order))
-
+*)
     use f = File.Open("TestData.xml", FileMode.Open, FileAccess.Read, FileShare.Read)
-    let db = TestData.Load(f)
+    //let db = TestData.Load(f)
 
     [|
+(*
         yield! db.Customers |> Array.map toAddCustomer 
         yield! db.Orders  |> Array.map toAddOrder
         yield! db.Products |> Array.map toProduct
         yield! db.OrderProducts |> Array.map toOrderProduct
+*)
     |]
