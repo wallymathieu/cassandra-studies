@@ -33,7 +33,7 @@ let CanGetProductById()=
 [<Fact>]
 let OrderContainsProduct()=
   let order = repo.GetOrder(1)
-  Assert.True(order.Products |> List.tryFind( fun p -> p.Id = 1) |> Option.isSome)
+  Assert.True(order.Products |> Array.tryFind( fun p -> p = 1) |> Option.isSome)
 
 //[<Fact>]
 //member this.OrderHasACustomer()=

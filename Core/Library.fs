@@ -1,11 +1,11 @@
 namespace SomeBasicCassandraApp
 open System
-
+[<CLIMutable>]
 type Customer = {Id:int; FirstName:string ; LastName:string; Version:int}
-
+[<CLIMutable>]
 type Product = {Id:int; Cost:decimal; Name: string; Version: int}
-
-type Order = {Id:int; Customer:Customer; OrderDate:DateTime; Products: Product list; Version: int}
+[<CLIMutable>]
+type Order = {Id:int; Customer:int; OrderDate:DateTime; Products: int array; Version: int}
 
 type Entity=
     | Customer of Customer
@@ -62,8 +62,8 @@ module Commands=
                                                Id=id
                                                OrderDate=orderDate
                                                Version=version
-                                               Customer= repository.GetCustomer(customer)
-                                               Products=List.empty
+                                               Customer= customer //repository.GetCustomer(customer)
+                                               Products=Array.empty
                                              }))
             | AddProductCommand(id=id; version=version; name=name; cost=cost)-> 
                 repository.Save(Entity.Product({
@@ -74,8 +74,8 @@ module Commands=
                                                }))
             | AddProductToOrder(orderId=orderId; productId=productId)->
                 let order = repository.GetOrder(orderId)
-                let product = repository.GetProduct(productId)
-                repository.Save(Entity.Order({order with Products= product :: order.Products}))
+                //let product = repository.GetProduct(productId)
+                repository.Save(Entity.Order({order with Products= ( productId :: (Array.toList order.Products) ) |> List.toArray}))
             | Empty -> ()
 (*
 open 
