@@ -9,9 +9,16 @@ open System
 open System.Collections.Generic
 open SomeBasicCassandraApp
 open GetCommands
+open Cassandra
 
 let commands = getCommands()
-let repo = CassandraRepository() :> IRepository
+let cluster = Cluster.Builder()
+                     .AddContactPoint("localhost")
+                     .WithDefaultKeyspace("cassandratests")
+                     .Build()
+// Connect to the nodes using a keyspace
+let session = cluster.ConnectAndCreateDefaultKeyspaceIfNotExists()
+let repo = CassandraRepository(session) :> IRepository
 let commandHandler = Commands.handle repo
 for command in commands |> Array.map WithSeqenceNumber.getCommand do
   commandHandler command

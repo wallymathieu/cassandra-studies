@@ -2,14 +2,22 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <FscToolPath>/Library/Frameworks/Mono.framework/Versions/Current/Commands</FscToolPath>
+    <FscToolExe>fsharpc</FscToolExe>
+
   </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="GetCommands.fs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
-    <Compile Include="CustomerDataTests.fs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
-    <None Include="TestData.xml" />
-    <Compile Include="Program.fs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="GetCommands.fs" />
+    <Compile Include="CustomerDataTests.fs" />
+    <Content Include="TestData.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="Program.fs" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.*" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="FSharp.Data" Version="2.4.2" />
     <ProjectReference Include="..\Core\Core.fsproj" />
-    <None Include="app.config" />
   </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

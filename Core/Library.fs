@@ -82,14 +82,22 @@ open
 *)
 open Cassandra
 open Cassandra.Mapping
+open Cassandra.Data.Linq
 
-type CassandraRepository()=
-    let cluster = Cluster.Builder()
-                         .AddContactPoints("localhost")
-                         .Build()
-    // Connect to the nodes using a keyspace
-    let session = cluster.Connect("cassandra-studies-repo")
-    let mapper = Mapper(session)
+type CassandraMappings() as this=
+  inherit Mappings ()
+  do 
+    this.For<Customer>().TableName("customers") |> ignore
+    this.For<Order>().TableName("orders") |> ignore
+    this.For<Product>().TableName("products") |> ignore
+
+type CassandraRepository(session:ISession)=
+    let config = MappingConfiguration().Define<CassandraMappings>()
+    do
+      Table<Customer>(session, config).CreateIfNotExists()
+      Table<Order>(session, config).CreateIfNotExists()
+      Table<Product>(session, config).CreateIfNotExists()
+    let mapper = Mapper(session, config)
     interface IRepository with
         member this.GetCustomer id=
              mapper.Single<Customer>("SELECT * FROM customers WHERE id = ?", id)
