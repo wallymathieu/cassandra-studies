@@ -3,14 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{17AF2EF0-DF8C-4E70-A1EF-3A8E959E6720}"
-	ProjectSection(SolutionItems) = preProject
-		paket.dependencies = paket.dependencies
-	EndProjectSection
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Tests", "Tests\Tests.fsproj", "{8038216D-15B8-4B33-8273-7B4657B8E889}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "Tests\Tests.fsproj", "{8038216D-15B8-4B33-8273-7B4657B8E889}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Core", "Core\Core.fsproj", "{762F3D0C-A10D-4636-A326-3BC1374D1DB2}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Core", "Core\Core.fsproj", "{762F3D0C-A10D-4636-A326-3BC1374D1DB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
