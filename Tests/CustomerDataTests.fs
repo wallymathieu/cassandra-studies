@@ -15,6 +15,7 @@ let commands = getCommands()
 let cluster = Cluster.Builder()
                      .AddContactPoint("localhost")
                      .WithDefaultKeyspace("cassandratests")
+                     .WithCredentials("cassandra","cassandra")
                      .Build()
 // Connect to the nodes using a keyspace
 let session = cluster.ConnectAndCreateDefaultKeyspaceIfNotExists()

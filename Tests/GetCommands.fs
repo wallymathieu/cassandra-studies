@@ -2,6 +2,7 @@
 open System
 open System.IO
 open FSharp.Data
+open FSharpPlus
 open SomeBasicCassandraApp
 
 type TestData = XmlProvider<"./TestData.xml", Global=false>
@@ -14,7 +15,7 @@ module GetCommands=
   let getCommands ()=
     let sequence = ref 0L
     let sequence_next ()=
-        sequence:=!sequence+1L
+        sequence.Value <- sequence.Value+1L
         !sequence
     let wrap c : WithSeqenceNumber=
         { SequenceNumber=sequence_next(); Command= c}
@@ -23,7 +24,7 @@ module GetCommands=
         wrap(AddCustomerCommand(id=o.Id,version=o.Version,firstName=o.Firstname,lastName=o.Lastname))
 
     let toAddOrder (o : TestData.Order)=
-        wrap(AddOrderCommand(id=o.Id,version=o.Version,customer=o.Customer, orderDate=o.OrderDate))
+        wrap(AddOrderCommand(id=o.Id,version=o.Version,customer=o.Customer, orderDate=o.OrderDate.UtcDateTime))
 
     let toProduct (o : TestData.Product)=
         wrap( AddProductCommand(id=o.Id,version=o.Version,name=o.Name,cost=o.Cost))

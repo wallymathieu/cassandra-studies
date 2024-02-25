@@ -1,32 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <FscToolPath>/Library/Frameworks/Mono.framework/Versions/Current/Commands</FscToolPath>
-    <FscToolExe>fsharpc</FscToolExe>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CassandraCSharpDriver" Version="3.3.2" />
+    <PackageReference Include="CassandraCSharpDriver" Version="3.20.0" />
+    <PackageReference Include="FsharpPlus" Version="1.6.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="Library.fs" />
   </ItemGroup>
 
-  <!--
-  <PropertyGroup Condition="'$(IsWindows)' == 'true'">
-    <FscToolPath>C:\Program Files (x86)\Microsoft SDKs\F#\4.1\Framework\v4.0</FscToolPath>
-    <FscToolExe>fsc.exe</FscToolExe>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(IsOSX)' == 'true'">
-    <FscToolPath>/Library/Frameworks/Mono.framework/Versions/Current/Commands</FscToolPath>
-    <FscToolExe>fsharpc</FscToolExe>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(IsLinux)' == 'true'">
-    <FscToolPath>/usr/bin</FscToolPath>
-    <FscToolExe>fsharpc</FscToolExe>
-  </PropertyGroup>
-
-  <Import Project="..\.paket\Paket.Restore.targets" />
--->
 </Project>
